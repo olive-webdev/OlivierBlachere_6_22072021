@@ -1,8 +1,10 @@
 const express = require('express');
+const helmet = require("helmet");
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 const path = require('path');
+
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
@@ -12,6 +14,8 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
+
+app.use(helmet());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
