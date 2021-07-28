@@ -11,9 +11,10 @@ const crypto = require('crypto');
 var key = crypto.createHash("sha256").update("openclassrooms", "ascii").digest();
 var iv = "1234567890123456";
 
+var sanitize = require('mongo-sanitize');
 
 exports.signup = (req, res, next) => {
-    const emailIsValid = validator.validate(req.body.email);
+    const emailIsValid = validator.validate(sanitize(req.body.email));
 
     if(!emailIsValid){
         res.writeHead(400, 'Email non reconnu',
@@ -21,7 +22,7 @@ exports.signup = (req, res, next) => {
         res.end("Le format de l'email est incorrect.")
     }
     else {
-        bcrypt.hash(req.body.password, 10)
+        bcrypt.hash(sanitize(req.body.password), 10)
         .then((hash) => {
 
             const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
@@ -40,7 +41,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
 
     const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
-    cipher.update(req.body.password, "ascii");
+    cipher.update(sanitize(req.body.password), "ascii");
     const encryptedEmail = cipher.final("base64");
 
     User.findOne({ email: encryptedEmail })
@@ -48,7 +49,7 @@ exports.login = (req, res, next) => {
         if (!user) {
             return res.status(401).json({ error: "Utilisateur non trouvé !" });
         }
-        bcrypt.compare(req.body.password, user.password)
+        bcrypt.compare(sanitize(req.body.password), user.password)
             .then((valid) => {
             if (!valid) {
                 return res.status(401).json({ error: "Mot de passe incorrect !" });
