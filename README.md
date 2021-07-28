@@ -1,5 +1,5 @@
-# <!-- Headings -->
-# exemple de README.MD
+
+# So Pekocko
 ## Heading 2
 ### Heading 3
 #### Heading 4
@@ -40,9 +40,22 @@ ___
   * Nested Item 2
 
 <!-- OL -->
-1. Item 1
-1. Item 2
-1. Item 3
+1. express
+1. mongoose
+1. body-parser
+1. path
+1. helmet
+1. dotenv
+1. mongoose-unique-validator
+1. password-validator
+1. multer
+1. jsonwebtoken
+1. bcrypt
+1. email-validator
+1. crypto
+1. mongo-sanitize
+1. fs
+1. express-rate-limit
 
 <!-- Inline Code Block -->
 `<p>This is a paragraph</p>`

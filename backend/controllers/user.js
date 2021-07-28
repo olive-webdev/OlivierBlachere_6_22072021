@@ -11,7 +11,7 @@ const crypto = require('crypto');
 var key = crypto.createHash("sha256").update("openclassrooms", "ascii").digest();
 var iv = "1234567890123456";
 
-var sanitize = require('mongo-sanitize');
+const sanitize = require('mongo-sanitize');
 
 exports.signup = (req, res, next) => {
     const emailIsValid = validator.validate(sanitize(req.body.email));

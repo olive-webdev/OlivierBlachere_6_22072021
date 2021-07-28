@@ -4,17 +4,22 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 const path = require('path');
+const rateLimit = require("express-rate-limit");
 
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100
+});
 
 mongoose.connect(process.env.DB_URL2, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
-
+app.use("/api/", apiLimiter);
 app.use(helmet());
 
 app.use((req, res, next) => {
