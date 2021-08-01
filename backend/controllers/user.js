@@ -67,3 +67,7 @@ exports.login = (req, res, next) => {
 };
 
 
+// Pour décrypter
+// const decipher = crypto.createDecipheriv("aes-256-cbc", key, iv);
+// decipher.update(encryptedEmail, "base64");
+// console.log("Decrypted: %s", decipher.final("ascii"));

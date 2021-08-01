@@ -1,45 +1,31 @@
-
 # So Pekocko
-## Heading 2
-### Heading 3
-#### Heading 4
-##### Heading 5
-###### Heading 6
 
-<!-- Italics -->
-*This text* is italic
-
-_This text_ is italic
-
-<!-- Strong -->
-**This text** is strong
-
-__This text__ is strong
-
-<!-- Strikethrough -->
-~~This text~~ is strikethrough
-
-<!-- Horizontal Rule -->
+*So Pekocko est une entreprise familiale de 10 salariés. Son activité principale est la création de sauces piquantes dont la composition est tenue secrète. Forte de son succès, l’entreprise souhaite se développer et créer une application web, dans laquelle les utilisateurs pourront ajouter leurs sauces préférées et liker ou disliker les sauces proposées par les autres.*
 
 ---
-___
+## Exigences concernant la sécurité :
 
-<!-- Blockquote -->
-> This is a quote
+* l’API doit respecter le RGPD et les standards OWASP ;
+* le mot de passe des utilisateurs doit être chiffré ;
+* 2 types de droits administrateur à la base de données doivent être définis : un accès
+pour supprimer ou modifier des tables, et un accès pour éditer le contenu de la base
+de données ;
+* la sécurité de la base de données MongoDB (à partir d’un service tel que MongoDB Atlas) doit être faite de telle sorte que le validateur puisse lancer l’application depuis sa machine ;
+* l’authentification est renforcée sur les routes requises ;
+* les mots de passe sont stockés de manière sécurisée ;
+* les adresses mails de la base de données sont uniques et un plugin Mongoose
+approprié est utilisé pour s’assurer de leur caractère unique et rapporter des erreurs.
 
-<!-- Links -->
-[Traversy Media](http://www.traversymedia.com)
+---
+## Erreurs API
+Toute erreur doit être renvoyée telle quelle, sans aucune modification ni ajout. Si nécessaire, utiliser une nouvelle Erreur().
 
-[Traversy Media](http://www.traversymedia.com "Traversy Media")
+---
+## Routes API
+Toutes les routes relatives à la sauce doivent exiger une demande authentifiée (contenant un jeton valide dans son en-tête d'autorisation : "Bearer <token<token>>").
 
-<!-- UL -->
-* Item 1
-* Item 2
-* Item 3
-  * Nested Item 1
-  * Nested Item 2
-
-<!-- OL -->
+---
+## Liste des modules implémentés :
 1. express
 1. mongoose
 1. body-parser
@@ -56,40 +42,3 @@ ___
 1. mongo-sanitize
 1. fs
 1. express-rate-limit
-
-<!-- Inline Code Block -->
-`<p>This is a paragraph</p>`
-
-<!-- Images -->
-![Markdown Logo](https://markdown-here.com/img/icon256.png)
-
-<!-- Github Markdown -->
-
-<!-- Code Blocks -->
-```bash
-  npm install
-
-  npm start
-```
-
-```javascript
-  function add(num1, num2) {
-    return num1 + num2;
-  }
-```
-
-```python
-  def add(num1, num2):
-    return num1 + num2
-```
-
-<!-- Tables -->
-| Name     | Email          |
-| -------- | -------------- |
-| John Doe | john@gmail.com |
-| Jane Doe | jane@gmail.com |
-
-<!-- Task List -->
-* [x] Task 1
-* [x] Task 2
-* [ ] Task 3
