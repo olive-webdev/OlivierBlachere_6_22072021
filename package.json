@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "dotenv": "^10.0.0",
-    "email-check": "^1.1.0",
-    "email-validator": "^2.0.4",
-    "password-validator": "^5.1.1"
-  }
-}
