@@ -6,6 +6,7 @@
 ## Installation
 
 sudo npm install -g @angular/cli
+sudo npm install node-sass@4.14
 
 git clone https://github.com/olive-webdev/OlivierBlachere_6_22072021.git
 
