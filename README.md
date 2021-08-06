@@ -8,12 +8,11 @@
 
 ## Installation
 
-1. sudo npm install -g @angular/cli
-1. sudo npm install node-sass@4.14
-
 git clone https://github.com/olive-webdev/OlivierBlachere_6_22072021.git
 
 * cd frontend 
+* sudo npm install -g @angular/cli
+* sudo npm install node-sass@4.14
 * npm install
 * ng serve
 
@@ -21,7 +20,7 @@ http://localhost:4200
 
 * cd backend
 * npm install
-* npm start
+* nodemon server
 
 ---
 ## Exigences concernant la sécurité :
