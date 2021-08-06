@@ -3,10 +3,13 @@
 *So Pekocko est une entreprise familiale de 10 salariés. Son activité principale est la création de sauces piquantes dont la composition est tenue secrète. Forte de son succès, l’entreprise souhaite se développer et créer une application web, dans laquelle les utilisateurs pourront ajouter leurs sauces préférées et liker ou disliker les sauces proposées par les autres.*
 
 ---
+
+![preview](./preview.png)
+
 ## Installation
 
-sudo npm install -g @angular/cli
-sudo npm install node-sass@4.14
+1. sudo npm install -g @angular/cli
+1. sudo npm install node-sass@4.14
 
 git clone https://github.com/olive-webdev/OlivierBlachere_6_22072021.git
 
@@ -18,7 +21,7 @@ http://localhost:4200
 
 * cd backend
 * npm install
-* nodemon server
+* npm start
 
 ---
 ## Exigences concernant la sécurité :

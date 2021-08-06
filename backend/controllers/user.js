@@ -17,7 +17,7 @@ exports.signup = (req, res, next) => {
     const emailIsValid = validator.validate(sanitize(req.body.email));
 
     if(!emailIsValid){
-        res.writeHead(400, 'Email non reconnu',
+        res.writeHead(400, 'Email incorrect',
         {'content-type': 'application/json'});
         res.end("Le format de l'email est incorrect.")
     }
@@ -26,7 +26,7 @@ exports.signup = (req, res, next) => {
         .then((hash) => {
 
             const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
-            cipher.update(req.body.password, "ascii");
+            cipher.update(req.body.email, "ascii");
             const encryptedEmail = cipher.final("base64");
 
             const user = new User({ email: encryptedEmail, password: hash });
@@ -41,7 +41,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
 
     const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
-    cipher.update(sanitize(req.body.password), "ascii");
+    cipher.update(sanitize(req.body.email), "ascii");
     const encryptedEmail = cipher.final("base64");
 
     User.findOne({ email: encryptedEmail })
