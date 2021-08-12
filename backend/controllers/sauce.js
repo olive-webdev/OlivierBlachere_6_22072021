@@ -12,7 +12,7 @@ exports.createSauce = (req, res, next) => {
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
         .then((sauce) => {res.status(200).json(sauce);})
-        .catch((error) => {res.status(404).json({error: error});});
+        .catch((error) => {res.status(404).json({ error });});
 };
 
 exports.modifySauce = (req, res, next) => {
@@ -55,7 +55,7 @@ exports.likeSauce = (req, res, next) => {
               if (!sauce.usersLiked.includes(req.body.userId)) {
                 Sauce.updateOne({_id: req.params.id}, {$inc: {likes: 1}, $push: {usersLiked: req.body.userId}, _id: req.params.id})
                 .then(() => res.status(201).json({ message: 'Liké' }))
-                .catch((error) => {res.status(400).json({error: error});});
+                .catch((error) => {res.status(400).json({ error });});
               }
             break;
     
@@ -80,7 +80,7 @@ exports.likeSauce = (req, res, next) => {
             break;
           
           default:
-            throw { error: "Un problème est survenu, modification des likes impossible" };
+            throw { error };
       }
     })
     .catch(error => res.status(400).json({ error }));
