@@ -26,9 +26,9 @@ exports.signup = (req, res, next) => {
     res.end("Le format de l'email est incorrect.");
   } else {
     bcrypt
-      .hash(sanitize(req.body.password), 10)
+      .hash(sanitize(req.body.password), 10) // hashage du mot de passe
       .then((hash) => {
-        const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
+        const cipher = crypto.createCipheriv("aes-256-cbc", key, iv); // cryptage de l'email
         cipher.update(sanitize(req.body.email), "ascii");
         const encryptedEmail = cipher.final("base64");
 
@@ -44,7 +44,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
+  const cipher = crypto.createCipheriv("aes-256-cbc", key, iv); // cryptage de l'email
   cipher.update(sanitize(req.body.email), "ascii");
   const encryptedEmail = cipher.final("base64");
 
@@ -54,16 +54,14 @@ exports.login = (req, res, next) => {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
       }
       bcrypt
-        .compare(sanitize(req.body.password), user.password)
+        .compare(sanitize(req.body.password), user.password) // comparaison du mot de passe utilisateur avec le hash en base de données
         .then((valid) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
           res.status(200).json({
             userId: user._id,
-            token: jwt.sign({ userId: user._id }, process.env.JWT_TOKEN, {
-              expiresIn: "1h",
-            }),
+            token: jwt.sign({ userId: user._id }, process.env.JWT_TOKEN, { expiresIn: "1h",}), // renvoie le token signé
           });
         })
         .catch((error) => res.status(500).json({ error }));

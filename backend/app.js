@@ -10,11 +10,11 @@ const rateLimit = require("express-rate-limit");
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 const apiLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 15 * 60 * 1000, // maximum 100 connexion en 15 minutes
     max: 100
 });
 
-mongoose.connect(process.env.DB_MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB_MONGO, { useNewUrlParser: true, useUnifiedTopology: true }) // connexion à la base de données
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -22,7 +22,7 @@ const app = express();
 app.use("/api/", apiLimiter);
 app.use(helmet());
 
-app.use((req, res, next) => {
+app.use((req, res, next) => { // configuration de cors
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');

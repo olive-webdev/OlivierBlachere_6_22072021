@@ -17,7 +17,7 @@ exports.getOneSauce = (req, res, next) => {
 
 exports.modifySauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
-        .then(sauce => {const filename = sauce.imageUrl.split('/images/')[1];
+        .then(sauce => {const filename = sauce.imageUrl.split('/images/')[1]; // suppression de l'ancienne image
             fs.unlink(`images/${filename}`, () => {
                 const sauceObject = req.file ?{...JSON.parse(req.body.sauce), imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`} : { ...req.body };
                 Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
@@ -51,7 +51,7 @@ exports.likeSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
     .then(sauce => { 
       switch (req.body.like) {
-          case 1 :
+          case 1 : // utilisateur aime la sauce
               if (!sauce.usersLiked.includes(req.body.userId)) {
                 Sauce.updateOne({_id: req.params.id}, {$inc: {likes: 1}, $push: {usersLiked: req.body.userId}, _id: req.params.id})
                 .then(() => res.status(201).json({ message: 'Liké' }))
@@ -59,7 +59,7 @@ exports.likeSauce = (req, res, next) => {
               }
             break;
     
-          case -1 :
+          case -1 : // utilisateur n'aime pas la sauce
               if (!sauce.usersDisliked.includes(req.body.userId)) {
                 Sauce.updateOne({_id: req.params.id}, {$inc: {dislikes: 1}, $push: {usersDisliked: req.body.userId}, _id: req.params.id})
             .then(() => res.status(201).json({ message: 'Disliké' }))
@@ -67,7 +67,7 @@ exports.likeSauce = (req, res, next) => {
               }
             break;
     
-          case 0:
+          case 0:  // utilisateur retire son j'aime ou j'aime pas
               if (sauce.usersLiked.includes(req.body.userId)) {
                 Sauce.updateOne({_id: req.params.id}, {$inc: {likes: -1}, $pull: {usersLiked: req.body.userId}, _id: req.params.id})
                 .then(() => res.status(201).json({ message: 'Like annulé' }))
